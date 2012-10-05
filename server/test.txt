@@ -1,0 +1,47 @@
+MNOT’S BLOG “Design depends largely on constraints.” — Charles Eames recent entries all entries feed
+
+Mark Nottingham chairs the IETF HTTPbis Working Group and is an expert on the Web, protocol design, HTTP, and caching. Find out more here.
+
+Monday, 24 September 2012
+CACHING POST
+One of the changes in Apple’s release of iOS6 last week was a surprising new ability to cache POST responses.
+
+Lots has been said about this, but some people reading RFC2616 have come away scratching their head about whether this is actually a bug or not.
+
+The HTTP spec says this about POST:
+
+Responses to this method are not cacheable, unless the response includes appropriate Cache-Control or Expires header fields. 
+Which, on the face of it, seems to say that a response to a POST can be cached.
+
+In fact, that is true, but how you’re allowed to subsequently use it is another matter that (unfortunately) 2616 is pretty obtuse about getting across.
+
+The first clue is here:
+
+All methods that might be expected to cause modifications to the origin server’s resources MUST be written through to the origin server. This currently includes all methods except for GET and HEAD. A cache MUST NOT reply to such a request from a client before having transmitted the request to the inbound server, and having received a corresponding response from the inbound server. 
+So, POST always has to be sent all the way to the origin server, no exceptions, even if you have a cache.
+
+Second, the definition of POST hints that caching the response isn’t terribly useful in terms of reusing it for future requests, because:
+
+The actual function performed by the POST method is determined by the server and is usually dependent on the Request-URI. […] The action performed by the POST method might not result in a resource that can be identified by a URI. In this case, either 200 (OK) or 204 (No Content) is the appropriate response status, depending on whether or not the response includes an entity that describes the result.
+Finally, if you try to cache a POST for reuse for future POSTs, you quickly realise that the request body needs to be part of the cache key — something that 2616’s caching section is completely silent about. That’s because, to the authors at the time, it was obvious that a HTTP cache can only be a GET cache — i.e., it can only store representations of the server’s state, and POSTs don’t deal in representations of identified state, 99 times out of 100.
+
+However, there is one case where it does; when the server goes out of its way to say that this POST response is a representation of its URI, by setting a Content-Location header that’s the same as the request URI. When that happens, the POST response is just like a GET response to the same URI; it can be cached and reused — but only for future GET requests.
+
+When we rewrote the caching section in HTTPbis (the revision to clarify HTTP/1.1 currently finishing up in the IETF, which I chair), we’ve ended up with a much more straightforward way to say it:
+
+Responses to POST requests are only cacheable when they include explicit freshness information (see Section 4.1.1 of [Part6]). A cached POST response with a Content-Location header field (see Section 9.8) whose value is the effective Request URI MAY be used to satisfy subsequent GET and HEAD requests.
+Note that POST caching is not widely implemented.
+This is based upon the logic above, along with the recollections and insights of some of the folks who were there at the beginning, especially Roy Fielding, as well as cache implementers like Henrik Nordström from Squid. 
+
+So, POST caching is possible, but it’s only useful in a very narrow way — when you want to use the result of the POST to serve future GETs for the same URI. And, as the spec says, it’s not commonly implemented. See Subbu's example and links to discussion at the time for more information.
+
+Back to Apple, even without the benefit of this context, they’re still clearly violating the spec; the original permission to cache in 2616 was contingent upon there being explicit freshness information (basically, Expires or Cache-Control: max-age).
+
+So, it’s a bug. Unfortunately, it’s one that will make people trust caches even less, which is bad for the Web.
+
+
+Filed under: Caching, HTTP
+
+LEAVE A COMMENT
+Sign in to comment.
+ABOUT BLOG PHOTOS HOME

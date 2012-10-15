@@ -1,14 +1,39 @@
 var fs=require('fs');
 
 var filename='peerinfo.json',
-	samplefile=fs.createReadStream(filename);
-	
-
-fs.readFile('peerinfo.json','utf-8',function(err,data){
+	samplefile=fs.readFileSync(filename,'utf-8');
+/*	
+fs.readFile(filename,function(err,data){
 	if (err) throw err;
     JSON.parse(data,function(key,value){
-    	if (key=='seeders'){
-			console.log(value[1]);
-		}
-	});
+		console.log(key+' '+value);
+		});
 });
+
+*/
+
+
+//console.log(schema.seeders);
+
+var ReadTorrent={
+	schema: JSON.parse(samplefile),
+	getPeerInfo:function(){	
+		var info=[];
+		this.schema.seeders.forEach(function(data){
+			var location=data.location;
+			var pieces=[ ];
+			pieces.push(data.pieces);
+			//console.log(location+' '+ typeof pieces);
+			info.push({loc:location,pie:pieces});
+			});
+		return info;
+		}
+	
+}
+
+
+
+var info=ReadTorrent.getPeerInfo();
+info.forEach(function(data){
+	console.log(data.loc);
+})

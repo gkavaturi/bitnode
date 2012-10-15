@@ -1,9 +1,24 @@
 {
 	"filename":"bach.mp3",
-	"no_of_bits":"12",
+	"no_of_bits":"6",
 	"no_of_active_seeders":"2",
+	"filesize":"4016",
 	"seeders":[
-		{"localhost1":"2 3 5"},
-		{"localhost2":"1 4 6"}
+		{
+		"location":"localhost1",
+		"pieces":[
+						"piece2.data",
+						"piece3.data",
+						"piece5.data"
+						]
+		},
+		{
+		"location":"localhost2",	
+		"pieces":[
+				"piece1.data",
+				"piece4.data",
+				"piece6.data"
+				]
+		}
 	]
 }

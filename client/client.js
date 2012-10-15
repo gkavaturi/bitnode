@@ -5,6 +5,7 @@ var child_process=require('child_process');
 var exec=require('child_process').exec;
 var spawn=require('child_process').spawn;
 **/
+var DIR='chunks';
 var options = {
   host: 'localhost',
   port: 2012,
@@ -33,7 +34,7 @@ req.end();
 **/
 
 //var filename='test.txt';
-var filename='bach_D_major.mp3';
+var filename=DIR+'/'+'bach_D_major.mp3';
 var file=fs.createWriteStream(filename);
 
 http.get(options,function(res){

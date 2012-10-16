@@ -20,20 +20,23 @@ var ReadTorrent={
 	getPeerInfo:function(){	
 		var info=[];
 		this.schema.seeders.forEach(function(data){
-			var location=data.location;
-			var pieces=[ ];
+			var location=data.location,
+				port=data.port,
+			 	pieces=[ ];
 			pieces.push(data.pieces);
 			//console.log(location+' '+ typeof pieces);
-			info.push({loc:location,pie:pieces});
+			info.push({loc:location,pie:pieces,port:port});
 			});
 		return info;
 		}
 	
 }
 
-
-
 var info=ReadTorrent.getPeerInfo();
 info.forEach(function(data){
-	console.log(data.loc);
+	data.pie.forEach(function(resp){
+	for (var i=0;i<resp.length;i++){
+		console.log(resp[i]+' is present in '+data.loc+':'+data.port);
+	}
+	});
 })

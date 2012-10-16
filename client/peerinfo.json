@@ -5,7 +5,8 @@
 	"filesize":"4016",
 	"seeders":[
 		{
-		"location":"localhost1",
+		"location":"localhost",
+		"port":"2012",
 		"pieces":[
 						"piece2.data",
 						"piece3.data",
@@ -13,7 +14,8 @@
 						]
 		},
 		{
-		"location":"localhost2",	
+		"location":"localhost",
+		"port":"2013",	
 		"pieces":[
 				"piece1.data",
 				"piece4.data",

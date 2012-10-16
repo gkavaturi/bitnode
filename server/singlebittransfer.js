@@ -1,12 +1,12 @@
 var fs=require('fs');
 var http=require('http');
 var url=require('url');
-var DIR='chunks';
+var DIR='chunks/';
 var PORT=2012;
 
 
 http.createServer(function(req,res){
-	var filename=DIR+'/piece2.data',
+	var filename=DIR+'piece2.data',
 		upstream=fs.createReadStream(filename);
 	console.log('opening filename '+filename);
 	console.log(upstream);	

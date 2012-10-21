@@ -1,0 +1,40 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'update' ]
+2 info using npm@1.1.59
+3 info using node@v0.8.8
+4 verbose read json /Users/gokulkavaturi/masters/package.json
+5 verbose read json /Users/gokulkavaturi/masters/node_modules/baudio/package.json
+6 verbose read json /Users/gokulkavaturi/masters/node_modules/connect/package.json
+7 verbose read json /Users/gokulkavaturi/masters/node_modules/express/package.json
+8 verbose read json /Users/gokulkavaturi/masters/node_modules/fileGlue/package.json
+9 verbose read json /Users/gokulkavaturi/masters/node_modules/filesplit/package.json
+10 verbose read json /Users/gokulkavaturi/masters/node_modules/ftp/package.json
+11 verbose read json /Users/gokulkavaturi/masters/node_modules/send/package.json
+12 verbose read json /Users/gokulkavaturi/masters/package.json
+13 verbose cache add [ 'update', null ]
+14 silly cache add name=undefined spec="update" args=["update",null]
+15 verbose parsed url { pathname: 'update', path: 'update', href: 'update' }
+16 silly lockFile 0a25ba59-update update
+17 verbose lock update /Users/gokulkavaturi/.npm/0a25ba59-update.lock
+18 silly lockFile 0a25ba59-update update
+19 verbose addNamed [ 'update', '' ]
+20 verbose addNamed [ null, '' ]
+21 silly lockFile f8258749-update update@
+22 verbose lock update@ /Users/gokulkavaturi/.npm/f8258749-update.lock
+23 silly lockFile f8258749-update update@
+24 error Error: EACCES, open '/Users/gokulkavaturi/.npm/f8258749-update.lock'
+24 error  { [Error: EACCES, open '/Users/gokulkavaturi/.npm/f8258749-update.lock']
+24 error   errno: 3,
+24 error   code: 'EACCES',
+24 error   path: '/Users/gokulkavaturi/.npm/f8258749-update.lock' }
+25 error Please try running this command again as root/Administrator.
+26 error System Darwin 12.2.0
+27 error command "node" "/usr/local/bin/npm" "install" "update"
+28 error cwd /Users/gokulkavaturi/masters/anode/client
+29 error node -v v0.8.8
+30 error npm -v 1.1.59
+31 error path /Users/gokulkavaturi/.npm/f8258749-update.lock
+32 error code EACCES
+33 error errno 3
+34 error stack Error: EACCES, open '/Users/gokulkavaturi/.npm/f8258749-update.lock'
+35 verbose exit [ 3, true ]

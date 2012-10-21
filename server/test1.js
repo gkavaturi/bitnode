@@ -1,6 +1,6 @@
 var express=require('express');
 var app=express();
-
+var PORT=7214;
 app.get('/',function(req,res){
 	//res.send('Testing file transfer');
 	//res.sendfile('/uploads/' + uid + '/' + file);
@@ -9,6 +9,6 @@ app.get('/',function(req,res){
 	});
 });
 
-app.listen(3000);
-console.log('Listening on Port 3000');
+app.listen(PORT);
+console.log('Listening on Port '+PORT);
 

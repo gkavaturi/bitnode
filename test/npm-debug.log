@@ -1,0 +1,40 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'prompt' ]
+2 info using npm@1.1.59
+3 info using node@v0.8.8
+4 verbose read json /Users/gokulkavaturi/masters/package.json
+5 verbose read json /Users/gokulkavaturi/masters/node_modules/baudio/package.json
+6 verbose read json /Users/gokulkavaturi/masters/node_modules/connect/package.json
+7 verbose read json /Users/gokulkavaturi/masters/node_modules/express/package.json
+8 verbose read json /Users/gokulkavaturi/masters/node_modules/fileGlue/package.json
+9 verbose read json /Users/gokulkavaturi/masters/node_modules/filesplit/package.json
+10 verbose read json /Users/gokulkavaturi/masters/node_modules/ftp/package.json
+11 verbose read json /Users/gokulkavaturi/masters/node_modules/send/package.json
+12 verbose read json /Users/gokulkavaturi/masters/package.json
+13 verbose cache add [ 'prompt', null ]
+14 silly cache add name=undefined spec="prompt" args=["prompt",null]
+15 verbose parsed url { pathname: 'prompt', path: 'prompt', href: 'prompt' }
+16 silly lockFile 9c7e05e5-prompt prompt
+17 verbose lock prompt /Users/gokulkavaturi/.npm/9c7e05e5-prompt.lock
+18 silly lockFile 9c7e05e5-prompt prompt
+19 verbose addNamed [ 'prompt', '' ]
+20 verbose addNamed [ null, '' ]
+21 silly lockFile 038de136-prompt prompt@
+22 verbose lock prompt@ /Users/gokulkavaturi/.npm/038de136-prompt.lock
+23 silly lockFile 038de136-prompt prompt@
+24 error Error: EACCES, open '/Users/gokulkavaturi/.npm/038de136-prompt.lock'
+24 error  { [Error: EACCES, open '/Users/gokulkavaturi/.npm/038de136-prompt.lock']
+24 error   errno: 3,
+24 error   code: 'EACCES',
+24 error   path: '/Users/gokulkavaturi/.npm/038de136-prompt.lock' }
+25 error Please try running this command again as root/Administrator.
+26 error System Darwin 12.2.0
+27 error command "node" "/usr/local/bin/npm" "install" "prompt"
+28 error cwd /Users/gokulkavaturi/masters/anode/test
+29 error node -v v0.8.8
+30 error npm -v 1.1.59
+31 error path /Users/gokulkavaturi/.npm/038de136-prompt.lock
+32 error code EACCES
+33 error errno 3
+34 error stack Error: EACCES, open '/Users/gokulkavaturi/.npm/038de136-prompt.lock'
+35 verbose exit [ 3, true ]

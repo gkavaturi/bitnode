@@ -21,15 +21,6 @@
 				"piece4.data",
 				"piece6.data"
 				]
-		},
-		{
-		"location":"localhost",
-		"port":"2015",	
-		"pieces":[
-				"piece1.data",
-				"piece4.data",
-				"piece6.data"
-				]
 		}
 	]
 }

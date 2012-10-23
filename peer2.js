@@ -1,7 +1,7 @@
 var http=require('http');
 var fs=require('fs');
 var SERVER_PORT=2012;
-
+var DIR='/test/peer2/';
 
 	
 var ReadTorrent={
@@ -31,7 +31,7 @@ var ReadTorrent={
 
 var getData=function(bitname,options){
 	http.get(options,function(res){
-		var filename=DIR+bitname,
+		var filename=__dirname+DIR+'/'+bitname,
 		 	bitfile=fs.createWriteStream(filename);
 		res.on('data',function(data){
 			console.log('STATUS: ' + res.statusCode+'\n');
@@ -40,7 +40,7 @@ var getData=function(bitname,options){
 			bitfile.write(data);
 		}).on('end',function(){
 			bitfile.end();
-			console.log('ending...');
+			console.log('ending... wrote data to '+filename);
 		});
 	});
 };
@@ -71,13 +71,15 @@ process.stdin.on('data',function(text){
 text=text.toString().trim();
 var instr=text.split(" ");
 process.stdout.write("Opening "+instr[1]+"\n");
-if (instr[0]=='start' && instr[1]){
-	downloadFile(instr[1]);
-}
 if(text=='quit'){
 	process.stdout.write('now exiting\n');
 	process.exit();
-}	
+}
+if (instr[0]=='start' && instr[1]){
+	downloadFile(instr[1]);
+}else{
+	process.stdout.write('undefined command')
+}
 });
 
 

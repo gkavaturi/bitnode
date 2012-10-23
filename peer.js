@@ -1,7 +1,7 @@
 var http=require('http');
 var fs=require('fs');
 var SERVER_PORT=2011;
-var DIR='/test/peer1';
+var DIR='/test/peer1/';
 
 	
 var ReadTorrent={
@@ -31,7 +31,7 @@ var ReadTorrent={
 
 var getData=function(bitname,options){
 	http.get(options,function(res){
-		var filename=__dirname+DIR+'/'+bitname,
+		var filename=__dirname+DIR+bitname,
 		 	bitfile=fs.createWriteStream(filename);
 		res.on('data',function(data){
 			console.log('STATUS: ' + res.statusCode+'\n');

@@ -5,3 +5,7 @@ Bitnode is a simple and complete peer to peer system which transfers files throu
 
 It is written in pure server side javascript and uses the file system and http modules from nodejs. 
 
+Website: bitnode.herokuapp.com
+
+This is a work in progress. 
+

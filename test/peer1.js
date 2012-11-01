@@ -1,7 +1,7 @@
 var http=require('http');
 var fs=require('fs');
-var SERVER_PORT=2013;
-var DIR='/test/peer3/';
+var SERVER_PORT=2011;
+var DIR='/test/peer1/';
 
 	
 var ReadTorrent={
@@ -69,8 +69,8 @@ process.stdin.setEncoding('utf8');
 
 process.stdin.on('data',function(text){
 text=text.toString().trim();
-var instr=text.split(" ");
-process.stdout.write("Opening "+instr[1]+"\n");
+var instr=text.split(' ');
+process.stdout.write('Opening '+instr[1]+'\n');
 if(text=='quit'){
 	process.stdout.write('now exiting\n');
 	process.exit();

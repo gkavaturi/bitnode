@@ -12,7 +12,7 @@ filestream.on('data',function(chunk){
 	var upfile=DIR+'/'+'piece'+count+'.data';
 		upstream=fs.createWriteStream(upfile);
 	upstream.write(chunk);
-	count++;
+	count=count;
 });
 
 filestream.on('end',function(){

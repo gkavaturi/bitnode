@@ -7,11 +7,18 @@ var filename='bach.mp3';
 		
 files.forEach(function(singlebit){
 	//console.log(files);
-	var bit=fs.createReadStream(DIR+singlebit);
+	var bit=fs.createReadStream(DIR+singlebit,{ 
+	  flags: 'r+',
+	  encoding: null,
+	  fd: null,
+	  mode: 0666,
+	  bufferSize: 64 * 1024
+	});
 	var resultfile=fs.createWriteStream(filename,{
 		flags:'r+',
 		encoding:null,
-		mode:0666
+		mode:0666,
+		bufferSize: 64 * 1024
 	});
 	bit.on('data',function(bitdata){ 
 			resultfile.write(bitdata); 

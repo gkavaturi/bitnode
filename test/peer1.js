@@ -1,7 +1,7 @@
 var http=require('http');
 var fs=require('fs');
 var SERVER_PORT=2011;
-var DIR='/test/peer1/';
+var DIR='peer1/';
 
 	
 var ReadTorrent={
@@ -28,19 +28,18 @@ var ReadTorrent={
 }
 
 
-
 var getData=function(bitname,options){
 	http.get(options,function(res){
-		var filename=__dirname+DIR+bitname,
+		var filename=__dirname+'/peer1/'+bitname,
 		 	bitfile=fs.createWriteStream(filename);
 		res.on('data',function(data){
-			console.log('STATUS: ' + res.statusCode+'\n');
-			console.log('HEADERS: ' + JSON.stringify(res.headers)+'\n');
-			console.log(data);
+			//console.log('STATUS: ' + res.statusCode+'\n');
+			//console.log('HEADERS: ' + JSON.stringify(res.headers)+'\n');
+			//console.log(data);
 			bitfile.write(data);
 		}).on('end',function(){
 			bitfile.end();
-			console.log('ending...');
+			//console.log('ending...');
 		});
 	});
 };
@@ -50,7 +49,7 @@ var downloadFile=function(filename){
 	info.forEach(function(data){
 		data.pie.forEach(function(bits){
 		for (var i=0;i<bits.length;i++){
-			console.log(bits[i]+' is present in '+data.loc+':'+data.port);
+			//console.log(bits[i]+' is present in '+data.loc+':'+data.port);
 			var options = {
 			  host: data.loc,
 			  port: data.port,
@@ -61,6 +60,28 @@ var downloadFile=function(filename){
 		}
 		});
 	});
+	return true;
+}
+
+var concanateFile=function(filename){
+	var files=fs.readdirSync(DIR);
+	files.forEach(function(singlebit){
+		//console.log(files);
+		var bit=fs.createReadStream(DIR+singlebit);
+		var resultfile=fs.createWriteStream(filename,{
+			flags:'a+',
+			encoding:null,
+			mode:0666,
+			bufferSize: 64 * 1024
+		});
+		bit.on('data',function(bitdata){ 
+				resultfile.write(bitdata); 
+			}).on('end',function(){
+				resultfile.end();
+			});
+		});
+	console.log('file complete');
+
 }
 
 
@@ -70,13 +91,18 @@ process.stdin.setEncoding('utf8');
 process.stdin.on('data',function(text){
 text=text.toString().trim();
 var instr=text.split(' ');
-process.stdout.write('Opening '+instr[1]+'\n');
 if(text=='quit'){
 	process.stdout.write('now exiting\n');
 	process.exit();
 }
 if (instr[0]=='start' && instr[1]){
-	downloadFile(instr[1]);
+	process.stdout.write('Opening '+instr[1]+'\n');
+	if (downloadFile(instr[1])){
+		concanateFile('bach.mp3');
+		process.stdout.write('Download complete');
+	}else{
+		process.stdout.write('Oops! Something went wrong. Please try again or send an email to support along with the link to the file you were trying to download\n');
+	}
 }else{
 	process.stdout.write('undefined command')
 }	
@@ -84,7 +110,7 @@ if (instr[0]=='start' && instr[1]){
 
 
 http.createServer(function(req,res){
-	var filename=__dirname+DIR+req.url.split("=")[1],
+	var filename=__dirname+'/'+DIR+req.url.split("=")[1],
 		upstream=fs.createReadStream(filename);
 	console.log('opening filename '+filename);
 	console.log(upstream);	

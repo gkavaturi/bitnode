@@ -1,7 +1,7 @@
 var http=require('http');
 var fs=require('fs');
 var SERVER_PORT=2013;
-var DIR='/test/peer3/';
+var DIR='peer3/';
 
 	
 var ReadTorrent={
@@ -29,7 +29,7 @@ var ReadTorrent={
 
 var getData=function(bitname,options){
 	http.get(options,function(res){
-		var filename=__dirname+DIR+bitname,
+		var filename=__dirname+'/'+DIR+bitname,
 		 	bitfile=fs.createWriteStream(filename);
 		res.on('data',function(data){
 			console.log('STATUS: ' + res.statusCode+'\n');
@@ -82,7 +82,7 @@ if (instr[0]=='start' && instr[1]){
 
 
 http.createServer(function(req,res){
-	var filename=__dirname+DIR+req.url.split("=")[1],
+	var filename=__dirname+'/peer3/'+req.url.split("=")[1],
 		upstream=fs.createReadStream(filename);
 	console.log('opening filename '+filename);
 	console.log(upstream);	

@@ -2,6 +2,7 @@ var http=require('http');
 var fs=require('fs');
 var crypto=require('crypto');
 var os=require('os');
+var custom=require('custom');
 
 var SERVER_PORT=(process.argv.length>2 && process.argv[2].split(":")[0]=="port" && !isNaN(process.argv[2].split(":")[1]))?process.argv[2].split(":")[1]:2012;
 
@@ -48,7 +49,7 @@ var ReadTorrent={
 			}),
 		schema = JSON.parse(samplefile);
 		schema.seeders.forEach(function(data){
-			data.uniqueid = cleanString(data.uniqueid);
+			data.uniqueid = custom.cleanString(data.uniqueid);
 			//if ((data.uniqueid) !== resid)
 			{
 				var location = data.location,
@@ -83,7 +84,7 @@ var getData=function(bitname,options){
 };
 
 var downloadFile=function(filename){
-	var resid = cleanString(getUniqueId()).replace(/\s+/gi,''),
+	var resid = custom.cleanString(getUniqueId()).replace(/\s+/gi,''),
 	 	info=ReadTorrent.getPeerInfo(filename),
 		orgfile=filename.split('/')[2];
 	info.forEach(function(data){

@@ -2,7 +2,7 @@ var http=require('http');
 var fs=require('fs');
 var crypto=require('crypto');
 var os=require('os');
-var custom=require('custom');
+var custom=require('./custom');
 
 var SERVER_PORT=(process.argv.length>2 && process.argv[2].split(":")[0]=="port" && !isNaN(process.argv[2].split(":")[1]))?process.argv[2].split(":")[1]:2012;
 
@@ -25,7 +25,7 @@ var cleanString=function(str){
 var options={
 	host:'localhost',
 	port:3000,
-	path:'/upload',
+	path:'/update',
 	method:'POST'
 };
 
@@ -38,7 +38,6 @@ var updateServer=http.request(options,function(res){
 
 var ReadTorrent={
 	getPeerInfo:function(filename){	
-		
 		if (!(filename)){
 			console.log('no file name detected');
 			process.exit();

@@ -9,3 +9,12 @@ Website: bitnode.herokuapp.com
 
 This is a work in progress. 
 
+
+Instructions to run the client
+
+node peer.js port:_port_number_ folder:_folder_to_download_
+
+e.g., node peer.js port:2012 folder:downloads/folder/
+
+default:2012
+folder:downloads/_peer_name_

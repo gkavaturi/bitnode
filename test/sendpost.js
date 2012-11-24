@@ -1,7 +1,6 @@
 var http=require('http'),
-    crypto=require('crypto'),
-    os=require('os'),
-    querystring=require('querystring');
+    querystring=require('querystring'),
+    custom=require('../custom');
 
 
 var cleanString=function(str){
@@ -15,17 +14,21 @@ var cleanString=function(str){
 }
 
 var getUniqueId=function(){
-	return crypto.createHash('md5').update(os.hostname()).digest('binary');
+	return crypto.createHash('md5').update(os.hostname()).digest('binary');    
 }
-var uniqueid=cleanString(getUniqueId());
+
+var uniqueid=custom.cleanString(custom.getUniqueId());
+
 var post_data = querystring.stringify({
-        'uniqueid' : uniqueid
+        'filename'  : 'bach_arai.json',
+        'bitname'   : 'peice0.data',
+        'uniqueid'  : uniqueid
   });
   
   var options={
   	host:'localhost',
   	port:3000,
-  	path:'/remember',
+  	path:'/update',
   	method:'POST',
   	headers: {
               'Content-Type': 'application/x-www-form-urlencoded',

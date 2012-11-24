@@ -1,5 +1,5 @@
 var fs=require('fs');
-var DIR='../chunks/';
+var DIR='chunks/';
 
 	
 var files=fs.readdirSync(DIR);

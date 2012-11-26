@@ -22,19 +22,44 @@ var cleanString=function(str){
 	return cleanstring;
 }
 	
-var options={
+var optionsU={
 	host:'localhost',
 	port:3000,
 	path:'/update',
 	method:'POST'
 };
 
-var updateServer=http.request(options,function(res){
+var updateServer=http.request(optionsU,function(res){
 	res.setEncoding('utf8');
 	res.on('data',function(chunk){
 		console.log('Updated Server: '+chunk);
 	});
 });
+
+console.log('This system unique id is '+custom.cleanString(getUniqueId()));
+//trying to set cookie
+var optionsC={
+    host:'localhost',
+	port:3000,
+	path:'/progress?uniqueid='+custom.cleanString(custom.getUniqueId()),
+	method:'GET'
+};
+/*
+var setCookie=http.request(optionsC,function(res){
+    console.log(JSON.stringify(optionsC));
+    res.setEncoding('utf8');
+    console.log('HEADERS: '+JSON.stringify(res.headers));
+    res.on('data',function(data){
+       console.log('set cookie '+data); 
+    });
+});
+
+setCookie.on('error',function(e){
+   console.log('problem with set cookie request '+e.message); 
+});
+*/
+//setCookie.write('set cookie');
+//setCookie.end();
 
 var ReadTorrent={
 	getPeerInfo:function(filename){	
@@ -138,10 +163,10 @@ var concanateFile=function(filename){
 
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
-
 process.stdin.on('data',function(text){
 	text=text.toString().trim();
 	var instr=text.split(' ');
+
 	if(text=='quit'){
 		process.stdout.write('now exiting\n');
 		process.exit();

@@ -2,21 +2,6 @@ var http=require('http'),
     querystring=require('querystring'),
     custom=require('../custom');
 
-
-var cleanString=function(str){
-	var cleanstring="";
-	for(var i=0;i<str.length;i++){
-		if (!str.charAt(i).match(/\s+/gi) && str.charCodeAt(i)!=127){
-			cleanstring=cleanstring+str.charAt(i);
-		}
-	}
-	return cleanstring;
-}
-
-var getUniqueId=function(){
-	return crypto.createHash('md5').update(os.hostname()).digest('binary');    
-}
-
 var uniqueid=custom.cleanString(custom.getUniqueId());
 
 var post_data = querystring.stringify({
@@ -25,7 +10,7 @@ var post_data = querystring.stringify({
         'uniqueid'  : uniqueid
   });
   
-  var options={
+var options={
   	host:'localhost',
   	port:3000,
   	path:'/update',

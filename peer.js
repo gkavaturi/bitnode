@@ -8,19 +8,7 @@ var SERVER_PORT=(process.argv.length>2 && process.argv[2].split(":")[0]=="port" 
 
 var DIR=(process.argv.length>3 && process.argv[3].split(":")[0]=="folder" && isNaN(process.argv[3].split(":")[1]))?process.argv[3].split(":")[1]:'./test/peer/';
 
-var getUniqueId=function(){
-	return crypto.createHash('md5').update(os.hostname()).digest('binary');
-}
 
-var cleanString=function(str){
-	var cleanstring="";
-	for(var i=0;i<str.length;i++){
-		if (!str.charAt(i).match(/\s+/gi) && str.charCodeAt(i)!=127){
-			cleanstring=cleanstring+str.charAt(i);
-		}
-	}
-	return cleanstring;
-}
 	
 var optionsU={
 	host:'localhost',
@@ -36,7 +24,7 @@ var updateServer=http.request(optionsU,function(res){
 	});
 });
 
-console.log('This system unique id is '+custom.cleanString(getUniqueId()));
+console.log('This system unique id is '+custom.cleanString(custom.getUniqueId()));
 //trying to set cookie
 var optionsC={
     host:'localhost',
@@ -108,7 +96,7 @@ var getData=function(bitname,options){
 };
 
 var downloadFile=function(filename){
-	var resid = custom.cleanString(getUniqueId()).replace(/\s+/gi,''),
+	var resid = custom.cleanString(custom.getUniqueId()).replace(/\s+/gi,''),
 	 	info=ReadTorrent.getPeerInfo(filename),
 		orgfile=filename.split('/')[2];
 	info.forEach(function(data){
@@ -127,7 +115,7 @@ var downloadFile=function(filename){
 					getData(bits[i],options);
 				}
 				updateServer.write(JSON.stringify({
-					uniqueid:getUniqueId(),
+					uniqueid:custom.getUniqueId(),
 					filename:orgfile,
 					bitname:bits[i]
 				}));

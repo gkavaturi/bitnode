@@ -23,8 +23,8 @@ var cleanString=function(str){
 }
 	
 var optionsU={
-	host:'localhost',
-	port:3000,
+	host:'bitnode.herokuapp.com',
+	port:80,
 	path:'/update',
 	method:'POST'
 };
@@ -37,31 +37,6 @@ var updateServer=http.request(optionsU,function(res){
 });
 
 console.log('This system unique id is '+custom.cleanString(getUniqueId()));
-
-//trying to set cookie
-/*
-var optionsC={
-    host:'localhost',
-	port:3000,
-	path:'/progress?uniqueid='+custom.cleanString(custom.getUniqueId()),
-	method:'GET'
-};
-
-var setCookie=http.request(optionsC,function(res){
-    console.log(JSON.stringify(optionsC));
-    res.setEncoding('utf8');
-    console.log('HEADERS: '+JSON.stringify(res.headers));
-    res.on('data',function(data){
-       console.log('set cookie '+data); 
-    });
-});
-
-setCookie.on('error',function(e){
-   console.log('problem with set cookie request '+e.message); 
-});
-*/
-//setCookie.write('set cookie');
-//setCookie.end();
 
 var ReadTorrent={
 	getPeerInfo:function(filename){	
@@ -77,7 +52,7 @@ var ReadTorrent={
 		schema.seeders.forEach(function(data){
 			data.uniqueid = custom.cleanString(data.uniqueid);
 			//if ((data.uniqueid) !== resid)
-			{
+			//{
 				var location = data.location,
 					port = data.port,
 					uniqueid=data.uniqueid,
@@ -85,12 +60,11 @@ var ReadTorrent={
 				pieces.push(data.pieces);
 				//	console.log(location+' '+' '+uniqueid+' '+pieces);
 				info.push({loc:location,port:port,uniqueid:uniqueid,pie:pieces});
-				}
+			//	}
 			});
 			return info;
 			}
 }
-
 
 
 var getData=function(bitname,options){
@@ -165,6 +139,7 @@ var concanateFile=function(filename){
 
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
+http.get('http://bitnode.herokuapp.com/remember?peerid='+custom.cleanString(custom.getUniqueId()));
 process.stdin.on('data',function(text){
 	text=text.toString().trim();
 	var instr=text.split(' ');

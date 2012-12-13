@@ -5,8 +5,8 @@
 	"filesize":"4096",
 	"seeders":[
 		{
-		"uniqueid":"ì:GQî\u000bôÔc(/:BÐn",
-		"location":"10.185.218.120",
+		"uniqueid":"test",
+		"location":"localhost",
 		"port":"2011",
 		"pieces":[
 		        "piece0.data",
@@ -56,8 +56,8 @@
 			]
 		},
 		{
-		"uniqueid":"ì:GQî\u000bôÔc(/:BÐn",
-		"location":"10.185.218.120",
+		"uniqueid":"test",
+		"location":"localhost",
 		"port":"2012",
 		"pieces":[
 					"piece42.data",
@@ -105,7 +105,7 @@
 				]
 		},
 		{
-		"uniqueid":"ì:GQî\u000bôÔc(/:BÐn",
+		"uniqueid":"test",
 		"location":"10.185.218.120",
 		"port":"2013",	
 		"pieces":[
@@ -155,12 +155,11 @@
 				]
 		},
 		{
-			"uniqueid":"•M\u0005o|\u0006;\u0005s2ÕˆIn",
-			"location":"10.185.194.139",
+			"uniqueid":"ì:GQî\u000bôÔc(/:BÐn",
+			"location":"localhost",
 			"port":"2014",
 			"pieces":[
-				"piece0.data",
-				"piece1.data"
+				"piece0.data"
 			]
 		}
 	]
